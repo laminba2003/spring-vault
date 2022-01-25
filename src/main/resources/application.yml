@@ -1,0 +1,14 @@
+server:
+  port : 9090
+spring:
+  application:
+    name: spring-vault
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      authentication: TOKEN
+      token: ${VAULT_TOKEN}
+      connection-timeout: 5000
+      read-timeout: 15000
+  config:
+    import: vault://
