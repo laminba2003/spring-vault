@@ -48,7 +48,7 @@ spring:
 
 ## Start the vault server
 
-run this command to start all services in the correct order.
+Run this command to start all services in the correct order.
 
 ```bash
 $ docker-compose up -d
