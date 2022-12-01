@@ -5,16 +5,18 @@ spring:
     name: spring-vault
   datasource:
     url: "jdbc:mysql://localhost:3307/spring-training?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false"
-    jpa:
-      database-platform: org.hibernate.dialect.MySQL8Dialect
-      open-in-view: false
-      hibernate:
-        use-new-id-generator-mappings: false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+    hibernate:
+      use-new-id-generator-mappings: false
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
   cloud:
     vault:
-      uri: http://localhost:8200
+      scheme: http
+      host: localhost
+      port: 8200
       authentication: TOKEN
       token: ${VAULT_TOKEN}
       connection-timeout: 5000
