@@ -5,9 +5,7 @@ RUN apt-get update && apt-get install -y software-properties-common curl gnupg2 
   apt-get update && apt-get install -y \
   vault && \
   setcap cap_ipc_lock= /usr/bin/vault
-USER vault
 WORKDIR .
-USER root
 COPY run.sh .
-RUN chmod 777 run.sh
+RUN chmod a+x run.sh
 ENTRYPOINT ["sh", "run.sh"]
