@@ -7,11 +7,13 @@ import com.spring.training.mapping.PersonMapper;
 import com.spring.training.repository.CountryRepository;
 import com.spring.training.repository.PersonRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @AllArgsConstructor
@@ -22,8 +24,10 @@ public class PersonService {
     final PersonMapper personMapper;
 
     @Transactional(readOnly = true)
-    public Page<Person> getPersons(Pageable pageable) {
-        return personRepository.findAll(pageable).map(personMapper::toPerson);
+    public List<Person> getPersons() {
+        return StreamSupport.stream(personRepository.findAll().spliterator(), false)
+                .map(personMapper::toPerson)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

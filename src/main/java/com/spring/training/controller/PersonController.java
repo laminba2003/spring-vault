@@ -3,12 +3,11 @@ package com.spring.training.controller;
 import com.spring.training.domain.Person;
 import com.spring.training.service.PersonService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("persons")
@@ -18,8 +17,8 @@ public class PersonController {
     final PersonService personService;
 
     @GetMapping
-    public Page<Person> getPersons(Pageable pageable) {
-        return personService.getPersons(pageable);
+    public List<Person> getPersons() {
+        return personService.getPersons();
     }
 
     @GetMapping("{id}")
